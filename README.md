@@ -1,47 +1,74 @@
-# Supermarket-Sales-Analysis
-End-to-end analysis of supermarket sales using PostgreSQL for ETL/EDA and Power BI for interactive visualization.
-# Supermarket Sales: End-to-End SQL & Power BI Analysis
+# supermarket sales: end-to-end sql & power bi analysis
 
-## 📌 Project Overview
-An analytical deep dive into supermarket performance across three branches (Alex, Cairo, Giza). This project demonstrates a full data pipeline: from **SQL Data Engineering** in PostgreSQL to **Executive Dashboards** in Power BI.
+## 📌 project overview
+an analytical deep dive into supermarket performance across three branches (alex, cairo, giza). this project demonstrates a full data pipeline: from **sql data engineering** in postgresql to **executive dashboards** in power bi.
 
----
 
-## 🛠️ Tech Stack
-- **Database:** PostgreSQL (pgAdmin 4)
-- **Visualization:** Power BI Desktop
-- **Language:** SQL, DAX
-- **Dataset:** [Kaggle Supermarket Sales](https://www.kaggle.com/datasets/faresashraf1001/supermarket-sales)
 
 ---
 
-## ⚙️ Data Engineering & ETL (PostgreSQL)
-I performed rigorous data cleaning and validation using SQL to ensure report accuracy:
-- **Environment Fix:** Resolved MDY date format conflicts using:
-  `ALTER DATABASE supermarket_sales_db SET datestyle TO "ISO, MDY";`
-- **Integrity Audit:** Verified 1,000 records and confirmed financial accuracy where `Total = COGS + Tax` within a 0.01 margin of error.
-- **EDA Discovery:** Identified that Gross Income follows a perfectly linear distribution relative to sales, suggesting a synthetic dataset with fixed margin rules.
+## 🛠️ tech stack
+* **database:** postgresql (pgadmin 4)
+* **visualization:** power bi desktop
+* **language:** sql, dax
+* **dataset:** [kaggle supermarket sales](https://www.kaggle.com/datasets/faresashraf1001/supermarket-sales)
 
 ---
 
-## 💡 Key Insights
-### 1. The Rush Hour Pulse
-SQL extraction identified peak traffic windows:
-- **13:00, 15:00, and 19:00** are the primary transaction spikes.
-- **Strategy:** Increase checkout staffing during these windows to reduce wait times.
-
-### 2. Branch Performance
-- **Alex and Cairo** show nearly identical revenue distributions, suggesting market saturation parity in these regions.
+## ⚙️ data engineering & etl (postgresql)
+i performed rigorous data cleaning and validation using sql to ensure report accuracy:
+* **environment fix:** resolved mdy date format conflicts using:
+    `alter database supermarket_sales_db set datestyle to "iso, mdy";`
+* **integrity audit:** verified 1,000 records where `total = cogs + tax`.
+* **eda discovery:** identified that gross income follows a perfectly linear distribution relative to sales, suggesting a synthetic dataset with fixed margin rules.
 
 ---
 
-## 📊 Dashboard Preview
-![Executive Summary](Images/dashboard_p1.png)
-![Customer Behaviour](Images/dashboard_p2.png)
+## 🧪 power bi logic (dax measures)
+to power the dynamic visuals, i authored custom dax measures for real-time kpi tracking:
+
+* **total revenue:** `total revenue = sum(sales[total])`
+* **gross margin %:** `gross margin % = divide(sum(sales[gross_income]), [total revenue], 0)`
+* **average rating:** `avg rating = average(sales[rating])`
+* **member sales ratio:** `member sales = calculate([total revenue], sales[customer_type] = "member")`
 
 ---
 
-## 📂 Project Structure
-- `/SQL_Scripts`: Full `analysis_queries.sql` including Window Functions and CTEs.
-- `/Dataset`: Raw `sales.csv` source data.
-- `/Reports`: Interactive `.pbix` Power BI file.
+## 🔍 key insights
+### 1. the rush hour pulse
+sql extraction identified peak traffic windows:
+* **13:00, 15:00, and 19:00** are the primary transaction spikes.
+* **strategy:** increase checkout staffing during these windows to reduce wait times.
+
+### 2. branch performance
+* **alex and cairo** show nearly identical revenue distributions, suggesting market saturation parity in these regions.
+
+### 3. payment trends
+* **e-wallets** are the most popular payment method among members, while cash remains common for non-members.
+
+---
+
+## 📊 dashboard preview
+![executive summary](Images/dashboard_p1.png)
+![customer behaviour](Images/dashboard_p2.png)
+
+---
+
+## 📂 project structure
+* `/sql_scripts`: full `analysis_queries.sql` including window functions and ctes.
+* `/dataset`: raw `sales.csv` source data.
+* `/reports`: interactive `.pbix` power bi file.
+
+---
+
+## 🚀 actionable recommendations
+1.  **staffing optimization:** shift part-time employee hours to cover the 13:00–15:00 and 18:00–20:00 peaks.
+2.  **loyalty programs:** launch "e-wallet" specific promotions to convert "normal" customers into "members."
+3.  **inventory management:** increase stock for high-performing categories (food & fashion) during weekend peak hours.
+
+---
+
+## ✉️ contact & links
+* **author:** Ahmed Hany
+* **linkedin:** (https://www.linkedin.com/in/ahmed-hany-aa0309265/)
+
